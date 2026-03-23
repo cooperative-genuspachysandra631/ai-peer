@@ -18,6 +18,8 @@ Let Claude Code, Codex, and OpenCode talk to each other — locally or across th
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/deps-zero-brightgreen)](skills/ai-peer/scripts/ai_peer/)
 
+[简体中文](./README_cn.md) | English
+
 **Works with**
 
 [![Claude Code](https://img.shields.io/badge/Claude_Code-d4a27f?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
