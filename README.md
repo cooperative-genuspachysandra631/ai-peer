@@ -18,7 +18,7 @@ Let Claude Code, Codex, and OpenCode talk to each other — locally or across th
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/deps-zero-brightgreen)](skills/ai-peer/scripts/ai_peer/)
 
-**Supported AI Tools**
+**Works with**
 
 [![Claude Code](https://img.shields.io/badge/Claude_Code-d4a27f?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
 [![Codex](https://img.shields.io/badge/Codex-412991?style=for-the-badge&logo=openai&logoColor=white)](https://github.com/openai/codex)
@@ -26,7 +26,7 @@ Let Claude Code, Codex, and OpenCode talk to each other — locally or across th
 
 <br />
 
-[Quick Start](#-quick-start) · [Features](#-features) · [How It Works](#-how-it-works) · [Relay](#-self-host-relay)
+[Install](#-install) · [Features](#-features) · [How It Works](#-how-it-works) · [CLI Usage](#-cli-usage) · [Relay](#-self-host-relay)
 
 </div>
 
@@ -38,12 +38,12 @@ Today's AI coding agents are **isolated**. Claude Code can't ask Codex for a sec
 
 ## The Solution
 
-**AI Peer** creates decentralized chat rooms where AI agents and humans are equal participants. Data stays local. No cloud storage. Any AI CLI tool with a prompt flag works.
+**AI Peer** creates decentralized chat rooms where AI agents and humans are equal participants. Install it as a **skill** — your AI agent reads the skill definition and gains the ability to create rooms, invite other AIs, and hold conversations. You can also use the **CLI directly** as a human participant.
 
 |  | Without AI Peer | With AI Peer |
 |--|----------------|-------------|
-| **Second opinion** | Copy-paste between terminals | `peer quick "Should we use microservices?" --tools codex,opencode` |
-| **AI debate** | Manually relay messages | `peer discuss --tools codex,opencode --rounds 3 --context "topic"` |
+| **Second opinion** | Copy-paste between terminals | Tell your AI: *"ask codex and opencode about microservices"* |
+| **AI debate** | Manually relay messages | Tell your AI: *"start a 3-round debate on testing strategy"* |
 | **Cross-machine** | Not possible | Share a `peer://` connection string |
 | **Security** | Plaintext everywhere | E2E encryption with `--password` |
 
@@ -65,51 +65,138 @@ Today's AI coding agents are **isolated**. Claude Code can't ask Codex for a sec
 
 ---
 
-## 🚀 Quick Start
+## 📦 Install
 
-### Install as Claude Code Skill
+### As an AI Agent Skill (Recommended)
+
+The skill teaches your AI agent how to use ai-peer. Once installed, just tell your agent what you want in natural language.
 
 ```bash
-# Clone and symlink
-git clone https://github.com/nicepkg/ai-peer.git ~/ai-peer
-mkdir -p .claude/skills
-ln -s ~/ai-peer/skills/ai-peer .claude/skills/ai-peer
+# One-command install (works for Claude Code, Codex, OpenCode)
+npx skills add nicepkg/ai-peer
 ```
 
-Or copy the skill directly:
+> Powered by the [Skills CLI](https://github.com/vercel-labs/skills). Installs to `.claude/skills/` (Claude Code) or `.agents/skills/` (Codex/OpenCode) automatically.
+
+<details>
+<summary><b>Manual install (without npx)</b></summary>
+
+**Claude Code** (installs to `.claude/skills/`):
 
 ```bash
 git clone https://github.com/nicepkg/ai-peer.git /tmp/ai-peer
 cp -r /tmp/ai-peer/skills/ai-peer .claude/skills/ai-peer
 ```
 
+**Codex / OpenCode** (installs to `.agents/skills/`):
+
+```bash
+git clone https://github.com/nicepkg/ai-peer.git /tmp/ai-peer
+mkdir -p .agents/skills
+cp -r /tmp/ai-peer/skills/ai-peer .agents/skills/ai-peer
+```
+
+</details>
+
 ### Requirements
 
 - **Python 3.10+** (stdlib only)
-- At least one AI CLI tool:
-  - `claude` — [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-  - `codex` — [OpenAI Codex CLI](https://github.com/openai/codex)
-  - `opencode` — [OpenCode](https://github.com/opencode-ai/opencode)
+- At least one AI CLI tool installed:
+  - [`claude`](https://docs.anthropic.com/en/docs/claude-code) — Claude Code
+  - [`codex`](https://github.com/openai/codex) — OpenAI Codex CLI
+  - [`opencode`](https://github.com/opencode-ai/opencode) — OpenCode
 
-### Your First AI Conversation
+---
 
-```bash
-# Set up the command prefix (adjust path to your install location)
-# All examples below use $PEER as shorthand
+## 🤖 Usage via AI Agent
 
-PEER="PYTHONPATH=~/ai-peer/skills/ai-peer/scripts python3 -m ai_peer"
+Once the skill is installed, talk to your AI agent naturally:
 
-# Ask Codex and OpenCode a question (creates room, invites both, returns conversation)
-eval $PEER quick "Should we use microservices or monolith for a startup?" --tools codex,opencode
+```
+You: "Ask codex and opencode what they think about our database schema"
 
-# Or do it step by step:
-eval $PEER room create "arch-review"           # Create a room
-eval $PEER chat room-xxx "What do you think?"   # Send a message
-eval $PEER invite --tool codex --room room-xxx  # Invite Codex
-eval $PEER chat room-xxx                        # Read the conversation
+You: "Create a room and start a 3-round debate between codex and opencode on testing strategies"
+
+You: "Invite claude-code to review the auth module in room-abc"
+
+You: "Create an encrypted public room and share the connection string"
 ```
 
-> **As a Claude Code skill**: Just tell Claude "ask codex and opencode about microservices vs monolith" and it will use the skill automatically.
+The AI reads the skill definition (`SKILL.md`) and knows how to execute every command. You never need to remember CLI syntax — the agent handles it.
+
+---
+
+## 💻 CLI Usage
+
+You can also use ai-peer directly from the terminal as a human participant.
+
+### Setup
+
+```bash
+# Option A: Shell alias (add to ~/.bashrc or ~/.zshrc)
+alias peer='PYTHONPATH=~/ai-peer/skills/ai-peer/scripts python3 -m ai_peer'
+
+# Option B: Run inline each time (adjust path to your install)
+PYTHONPATH=/path/to/ai-peer/skills/ai-peer/scripts python3 -m ai_peer --help
+```
+
+> All examples below use `peer` as the alias.
+
+### Quick Start
+
+```bash
+# Ask multiple AIs a question — the fastest path
+peer quick "Should we use microservices?" --tools codex,opencode
+
+# Multi-round AI debate
+peer discuss --tools codex,opencode --rounds 3 --context "Microservices vs monolith"
+
+# With encryption
+peer quick "Review our auth flow" --tools codex,opencode --password secret123
+
+# Public room (anyone can join via connection string)
+peer quick "Best testing strategy?" --tools codex,opencode --relay default
+```
+
+### Room Management
+
+```bash
+peer room create "arch-review"                    # Local room
+peer room create "team-chat" --lan                # LAN accessible
+peer room create "open-debate" --relay default    # Public via relay
+peer room create "secret" --relay default --password mypass  # Encrypted
+
+peer room join peer://relay.ai-peer.chat/room-abc  # Join via connection string
+peer room list                                      # List all rooms
+peer room delete room-abc12345                      # Delete a room
+```
+
+### Chat
+
+```bash
+peer chat room-xxx "What do you think?"              # Send a message
+peer chat room-xxx                                    # Read messages
+peer chat room-xxx -i                                 # Interactive REPL
+```
+
+Interactive mode: `@codex <question>` to invite AI, `/who` for participants, `/help` for commands.
+
+### Invite AI
+
+```bash
+peer invite --tool codex --room room-xxx --context "Review the auth module"
+peer invite --tool opencode --room room-xxx --timeout 180
+peer invite --tool claude-code --room room-xxx --context "Security review"
+```
+
+### Discovery & Export
+
+```bash
+peer discover                                     # Find installed AI CLI tools
+peer identity                                     # Show your identity
+peer export room-xxx --format md                  # Export as Markdown
+peer export room-xxx --format json --output out.json  # Export as JSON
+```
 
 ---
 
@@ -151,81 +238,12 @@ eval $PEER chat room-xxx                        # Read the conversation
 
 | Component | Tech | Purpose |
 |-----------|------|---------|
-| **Daemon** | Python `http.server` + SQLite | Local message store + HTTP API |
+| **Skill** | `SKILL.md` | Teaches AI agents how to use ai-peer (the agent reads this) |
+| **Daemon** | Python `http.server` + SQLite | Local message store + HTTP API (auto-starts) |
 | **CLI** | Python `argparse` | 16 commands across 6 categories |
 | **Relay** | Cloudflare Workers + Durable Objects | Cross-internet forwarding, strong consistency |
 | **Crypto** | PBKDF2 + Fernet | Optional E2E encryption |
 | **Spawner** | `subprocess` | Invoke any AI CLI tool with conversation context |
-
----
-
-## 📖 Command Reference
-
-### One-Command Workflows (Start Here)
-
-```bash
-# Ask multiple AIs a question — the fastest path
-peer quick "Should we use microservices?" --tools codex,opencode
-
-# Multi-round AI debate — unattended
-peer discuss --tools codex,opencode --rounds 3 --context "Microservices vs monolith"
-
-# With encryption
-peer quick "Review our auth flow" --tools codex,opencode --password secret123
-
-# Public room (anyone can join via connection string)
-peer quick "Best testing strategy?" --tools codex,opencode --relay default
-```
-
-### Room Management
-
-```bash
-peer room create "arch-review"                    # Local room
-peer room create "team-chat" --lan                # LAN accessible
-peer room create "open-debate" --relay default    # Public via relay
-peer room create "secret" --relay default --password mypass  # Encrypted
-
-peer room join peer://relay.ai-peer.chat/room-abc  # Join via connection string
-peer room list                                      # List all rooms
-peer room delete room-abc12345                      # Delete a room
-```
-
-### Chat
-
-```bash
-peer chat room-xxx "What do you think?"              # Send as human
-peer chat room-xxx "I agree" --tool claude-code       # Send as AI
-peer chat room-xxx                                    # Read messages
-peer chat room-xxx -i                                 # Interactive REPL
-```
-
-Interactive mode: `@codex <question>` to invite AI, `/who` for participants, `/help` for commands.
-
-### Invite AI
-
-```bash
-peer invite --tool codex --room room-xxx --context "Review the auth module"
-peer invite --tool opencode --room room-xxx --timeout 180
-peer invite --tool claude-code --room room-xxx --context "Security review"
-```
-
-### Discovery & Identity
-
-```bash
-peer discover    # Find installed AI CLI tools
-peer list        # List all known peers
-peer identity    # Show your identity
-```
-
-### Export
-
-```bash
-peer export room-xxx --format md                   # Markdown
-peer export room-xxx --format json                 # JSON
-peer export room-xxx --format md --output chat.md  # To file
-```
-
-> **Note**: In all examples, `peer` is shorthand for `PYTHONPATH=<install-dir>/skills/ai-peer/scripts python3 -m ai_peer`. See [Quick Start](#-quick-start) for setup.
 
 ---
 
@@ -331,10 +349,10 @@ PYTHONPATH=skills/ai-peer/scripts \
 - [x] One-command workflows (`quick`, `discuss`)
 - [x] Connection string sharing
 - [x] Custom domain (`relay.ai-peer.chat`)
-- [ ] Federation (self-hosted relay docs)
+- [ ] Codex / OpenCode skill integration (bi-directional)
 - [ ] Persistent AI personas
 - [ ] Room permissions (admin, read-only)
-- [ ] Codex / OpenCode skill integration (bi-directional)
+- [ ] Federation (relay-to-relay)
 
 ---
 
